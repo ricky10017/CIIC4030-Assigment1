@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>LexicalAnalyzer.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #629755; font-style: italic;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+LexicalAnalyzer.py</font>
+</center></td></tr></table>
+<pre><span class="s0">from </span><span class="s1">ply </span><span class="s0">import </span><span class="s1">lex</span>
+
+<span class="s1">tokens = (</span><span class="s2">'IF'</span><span class="s0">, </span><span class="s2">'THEN'</span><span class="s0">, </span><span class="s2">'ELSE'</span><span class="s0">, </span><span class="s2">'MAP'</span><span class="s0">, </span><span class="s2">'TO'</span><span class="s0">, </span><span class="s2">'LET'</span><span class="s0">, </span><span class="s2">'IN'</span><span class="s0">,</span>
+          <span class="s2">'NULL'</span><span class="s0">, </span><span class="s2">'TRUE'</span><span class="s0">, </span><span class="s2">'FALSE'</span><span class="s0">, </span><span class="s2">'LOWER'</span><span class="s0">, </span><span class="s2">'UPPER'</span><span class="s0">, </span><span class="s2">'QSIGN'</span><span class="s0">,</span>
+          <span class="s2">'UNDER'</span><span class="s0">, </span><span class="s2">'NUMBER'</span><span class="s0">, </span><span class="s2">'ALPHA'</span><span class="s0">, </span><span class="s2">'ALPHAOTHER'</span><span class="s0">,</span>
+          <span class="s2">'ALPHAOTHERNUMERIC'</span><span class="s0">, </span><span class="s2">'RPAREN'</span><span class="s0">, </span><span class="s2">'LPAREN'</span><span class="s0">,</span>
+          <span class="s2">'RBRACKET'</span><span class="s0">, </span><span class="s2">'LBRACKET'</span><span class="s0">, </span><span class="s2">'COMMA'</span><span class="s0">, </span><span class="s2">'SEMICOLON'</span><span class="s0">,</span>
+          <span class="s2">'PLUS'</span><span class="s0">, </span><span class="s2">'MINUS'</span><span class="s0">, </span><span class="s2">'APPROX'</span><span class="s0">, </span><span class="s2">'TIMES'</span><span class="s0">, </span><span class="s2">'DIV'</span><span class="s0">, </span><span class="s2">'EQUAL'</span><span class="s0">,</span>
+          <span class="s2">'NOTEQUAL'</span><span class="s0">, </span><span class="s2">'SMALLER'</span><span class="s0">, </span><span class="s2">'BIGGER'</span><span class="s0">, </span><span class="s2">'SEQUAL'</span><span class="s0">, </span><span class="s2">'BEQUAL'</span><span class="s0">,</span>
+           <span class="s2">'AND'</span><span class="s0">, </span><span class="s2">'OR'</span><span class="s0">, </span><span class="s2">'COLONEQUAL'</span><span class="s1">)</span>
+
+<span class="s1">t_ignore = </span><span class="s2">' </span><span class="s0">\t</span><span class="s2">'</span>
+<span class="s1">t_PLUS = </span><span class="s2">r'\+'</span>
+<span class="s1">t_MINUS = </span><span class="s2">r'-'</span>
+<span class="s1">t_TIMES = </span><span class="s2">r'\*'</span>
+<span class="s1">t_DIV = </span><span class="s2">r'/'</span>
+<span class="s1">t_LPAREN = </span><span class="s2">r'\('</span>
+<span class="s1">t_RPAREN = </span><span class="s2">r'\)'</span>
+
+<span class="s0">def </span><span class="s1">t_NUMBER(t):</span>
+    <span class="s3">r'[0-9]+'</span>
+    <span class="s1">t.value = int(t.value)</span>
+    <span class="s0">return </span><span class="s1">t</span>
+
+<span class="s0">def </span><span class="s1">t_newline(t):</span>
+    <span class="s3">r'\n+'</span>
+    <span class="s1">t.lexer.lineno += len(t.value)</span>
+
+<span class="s0">def </span><span class="s1">t_error(t):</span>
+    <span class="s1">print(</span><span class="s2">&quot;Invalid Token: &quot;</span><span class="s0">, </span><span class="s1">t.value[</span><span class="s4">0</span><span class="s1">])</span>
+    <span class="s1">t.lexer.skip(</span><span class="s4">1</span><span class="s1">)</span>
+
+<span class="s1">lexer = lex.lex()</span></pre>
+</body>
+</html>
